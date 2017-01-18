@@ -1,12 +1,16 @@
 const superagent = require('superagent');
 const moment = require('moment');
+let lastMagicNumber = null;
 
 
 const doJob = async () => {
   const data = await getDataFromApi();
   const magicNumber = data.magicNumber;
 
-  console.log(`${moment().format('HH:mm:ss')}    Magic number is: ${magicNumber}`);
+  if (magicNumber !== lastMagicNumber) {
+    console.log(`${moment().format('HH:mm:ss')}    Magic number is: ${magicNumber}`);
+    lastMagicNumber = magicNumber;
+  }
 };
 
 const getDataFromApi = async () => {
