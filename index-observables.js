@@ -4,8 +4,10 @@ const moment = require('moment');
 
 
 const intervalStream = Rx.Observable.interval(5000).startWith(1);
+const sigintStream = Rx.Observable.fromEvent(process, 'SIGINFO');
+const jobStream = intervalStream.merge(sigintStream);
 
-const magicNumbersStream = intervalStream
+const magicNumbersStream = jobStream
   .flatMap(() => Rx.Observable.fromPromise(superagent('http://127.0.0.1:3005/api')))
   .map(data => data.body.magicNumber)
   .distinctUntilChanged()
