@@ -25,3 +25,4 @@ const getDataFromApi = async () => {
 
 jobIntervalHandler = setInterval(doJob, 5000);
 doJob();
+process.on('SIGINT', doJob);
