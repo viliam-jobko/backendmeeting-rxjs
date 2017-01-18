@@ -16,3 +16,4 @@ const getDataFromApi = async () => {
 
 
 setInterval(doJob, 5000);
+doJob();
